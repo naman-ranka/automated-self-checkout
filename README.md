@@ -1,3 +1,19 @@
+> **Note:** This is a fork of the `intel-retail/automated-self-checkout` repository. The original README is below. My personal contributions are summarized here for portfolio purposes.
+
+# My Contribution
+
+I developed and integrated a comprehensive sensor analytics and visualization platform for the Automated Self Checkout system. This feature, which was merged into the main project, provides a scalable solution for ingesting, processing, and monitoring data from peripheral sensors.
+
+My work included:
+
+*   **Scalable Microservice:** I designed and built a `common-service` using Python and Docker to handle real-time data from both LiDAR and weight sensors.
+*   **Configurable Data Pipeline:** I engineered a flexible data pipeline with MQTT, Kafka, and HTTP endpoints, allowing for easy integration with other services.
+*   **Real-Time Visualization:** I integrated and provisioned a Grafana dashboard for real-time visualization of sensor data, which is crucial for debugging and monitoring the system's performance.
+
+You can view the full details of my contribution, including the code, discussions, and review process, in the merged pull request: **[feat(microservices): add LiDAR, Weight, Peripheral Analytics, and Grafana integration #655](https://github.com/intel-retail/automated-self-checkout/pull/655)**
+
+---
+
 # Automated Self Checkout
 
 ![Integration](https://github.com/intel-retail/automated-self-checkout/actions/workflows/integration.yaml/badge.svg?branch=main)
@@ -33,6 +49,36 @@ stop containers:
 ```
 make down
 ```
+
+## Sensor Analytics and Visualization
+
+This project includes a `common-service` for managing LiDAR and Weight sensors, which can be configured to publish data to MQTT, Kafka, and HTTP. It also includes Grafana for real-time data visualization over MQTT.
+
+### Overview
+
+*   **Common-Service**: A single container handles both LiDAR and Weight sensors. Each sensor has its own configuration for sensor ID, port, and mock mode.
+*   **Data Publishing**: The service can publish data to MQTT, Kafka, and HTTP, and is fully controlled via `docker-compose.yml`.
+*   **Grafana Integration**: A Grafana container is provided with a preloaded "Sensor-Analytics" dashboard and an MQTT data source.
+
+### How to Use
+
+1.  **Start all services:**
+
+    ```
+    make run-demo
+    ```
+
+2.  **Access Grafana:**
+
+    *   Go to [http://localhost:3000](http://localhost:3000)
+    *   Default Credentials: `admin` / `admin`
+
+3.  **View the Dashboard:**
+
+    *   Look for "Sensor-Analytics" in the Dashboards list.
+    *   If you see no data, go to **Configuration > Data Sources** and confirm the MQTT data source URI is set to `tcp://mqtt-broker_1:1883` or `tcp://mqtt-broker:1883` (depending on your Docker network name).
+
+For more advanced configuration and testing of Kafka and HTTP publishing, please refer to the `README.md` file in the `src/common-service` directory.
 
 ## [Advanced Documentation](https://intel-retail.github.io/documentation/use-cases/automated-self-checkout/automated-self-checkout.html)
 
