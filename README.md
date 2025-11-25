@@ -34,6 +34,27 @@ stop containers:
 make down
 ```
 
+## Telemetry
+
+This project includes a telemetry feature that allows you to monitor the performance of the underlying hardware. It uses `telegraf` to collect metrics and `influxdb` to store and visualize them. This is particularly useful for understanding the performance of Intel CPUs and GPUs while the automated self-checkout system is running. With this, you can gain insights into resource utilization and identify potential bottlenecks.
+
+### How to Use
+
+1.  **Start the telemetry containers:**
+
+    ```
+    cd telegraf
+    ./docker-run.sh
+    ```
+
+2.  **Access the InfluxDB dashboard:**
+
+    Open your web browser and navigate to [http://localhost:8086](http://localhost:8086).
+
+3.  **View the telemetry data:**
+
+    Once in the InfluxDB UI, you can import the provided dashboard configuration file, `intel_core_and_igpu_telemetry.json`, to view the telemetry data.
+
 ## [Advanced Documentation](https://intel-retail.github.io/documentation/use-cases/automated-self-checkout/automated-self-checkout.html)
 
 ## Join the community 
